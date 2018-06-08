@@ -1,0 +1,7 @@
+{
+    "/app/*" : {
+        "target" : "http://localhost:8082/inteligentni-lekar.com",
+        "secure" : false
+    }
+
+}

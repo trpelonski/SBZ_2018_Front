@@ -1,0 +1,39 @@
+<div class="container">
+    <h3 class="set-center">Izaberite pacijenta</h3>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Pronadjite pacijente" aria-label="kriterijumPacijenti" aria-describedby="basic-addon2" [(ngModel)] = "searchPacijentiText">
+        <div class="input-group-append">
+            <button class="btn btn-primary redBtn" type="button" (click) = "pretraziPacijente()">Pretrazi</button>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-primary redBtn" type="button" (click) = "osveziPacijente()">Osvezi</button>
+        </div>
+    </div>
+    <div class="container">
+      <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Ime</th>
+              <th scope="col">Prezime</th>
+              <th scope="col">Broj kartona</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="pacijenti==null || pacijenti?.length === 0">Nema pacijenata da se pokaze</tr>
+                <tr *ngFor="let pacient of pacijenti" [ngClass] = "{'selected-row' : selected?.id===pacient.id}" (click)="selectPatient(pacient)">
+                  <td>{{pacient.firstname}}</td>
+                  <td>{{pacient.lastname}}</td>
+                  <td>{{pacient.stringId}}</td>
+              </tr>    
+           </tbody>
+         </table>
+            <div>
+              <button class="btn btn-info right-items redBtn" (click)="nextPacijenti()">&#x21E8;</button>
+              <button class="btn btn-info right-items redBtn">{{pacijentiStranica}}</button>
+              <button class="btn btn-info right-items redBtn" (click)="prevPacijenti()">&#x21E6;</button>
+            </div>
+        </div>
+        <div class="column1 bottom"><a [ngClass]="{'red-button' : isNextAvailable(), 'red-button-disabled' : !isNextAvailable()}" (click) = "isNextAvailable() ? setData(): false">Dalje</a></div>
+    </div>
+</div>

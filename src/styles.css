@@ -1,0 +1,162 @@
+.naslov {
+	font-family: Helvetica;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 700;
+	color: #00264d;
+}
+
+.nav-link, .navbar-left {
+    color: #00264d;
+    font-family: Helvetica;
+}
+
+.navbar-right{
+    margin-top:20px; 
+}
+
+.navbar, .dropdown-menu-right {
+    background-color: #A7CDC2;
+    border-color: #52615E;
+    color: #00264d;
+    font-family: Helvetica;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-text, .navbar-default a p, .nav-item .btn-link {
+    color: #00264d;
+    font-family: Helvetica;
+}
+
+a:hover {
+    cursor:pointer;
+}
+
+.redBtn{
+	background-color: #ec0d0d;
+}
+
+.gap-top{
+	margin-top:50px; 
+}
+
+.pozadina{
+	background-color: #A7CDC2;
+    border-color: #52615E;
+}
+
+.right-items{
+    float:right;
+}
+
+a.red-button, a.red-button-disabled
+{	
+	text-decoration : none;
+	outline : none;
+	display: inline-block;
+	padding: 1em 2em 1em 2em;
+	letter-spacing: 0em;
+	margin-top: 2em;
+	padding: 1.40em 3em;
+	background: #ec0d0d;
+	border-radius: 6px;
+	font-weight: 700;
+	font-size: 1em;
+	color: #ffffff;
+}
+
+a.red-button-disabled  
+{
+	cursor : not-allowed;
+	background: #f5c4c4;
+	color: #ffffff;
+}
+
+a.submit-button
+{	
+	text-decoration : none;
+	outline : none;
+	display: inline-block;
+	letter-spacing: 0em;
+	padding: 1em 1em;
+	background: #ec0d0d;
+	border-radius: 6px;
+	font-size: 1em;
+	color: #ffffff;
+}
+
+.selected-row, .selected-col
+{
+	background: #e5f2ff;
+}
+
+.column1, .column2
+{
+	width : 49%;
+	margin-top : 2em;
+}
+
+.column1
+{
+	float : left;
+}
+
+.column1.bottom
+{
+	margin-right : 50%;
+}
+
+.column2
+{
+	float : right;
+}
+
+.set-center {
+    text-align: center;
+}
+
+.scroll { border:2px solid #ccc; width:440px; height: 320px; overflow-y: scroll; }
+
+.boxA,
+.boxB,
+.boxC
+{
+		width: 33%;
+}
+
+.boxA,
+.boxB
+{
+	float: left;
+	margin-right: 1em;
+}
+	
+.boxB
+{
+	margin-left: 100px;
+}
+	
+.boxC
+{
+	float: right;
+}
+
+.custom-boxA
+{
+	width:100%;
+}
+
+.custom-boxB
+{
+	white-space : nowrap;
+}
+
+#tab-find .boxB div, .custom-boxA div
+{
+	margin-bottom : 1em;
+}
+
+.lower
+{
+	padding-top: 25px;
+}

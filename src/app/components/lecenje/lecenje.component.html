@@ -1,0 +1,59 @@
+<div class="container">
+    <h4 class="set-center">Broj kartona: {{kartonBr}}</h4>
+    <div class="boxA">
+      <h6>Izaberite simptome:</h6>
+      <div class="scroll">
+          <div *ngFor="let symptom of symptoms">
+            <input type="checkbox" (change)="bindSymptom(symptom)"/>
+            <label>{{symptom.name}}</label>
+        </div>
+      </div>
+      <div class="column1 bottom custom-boxB"><a class="red-button" (click) = "previousStep()">Vrati se</a>
+        <a class="red-button">Dalje</a>
+        <a class="red-button" (click)="ponisti()">Ponisti</a></div>
+  </div>
+    <div class="boxB custom-boxB">
+       <div> <a class="red-button" (click)="getMostLikelyDisease()">Najverovatnija bolest</a>
+        <a [ngClass]="{'red-button' : selectedSymptoms.length!=0, 'red-button-disabled' : selectedSymptoms.length==0}" (click)="getSymptomsDisease()">Sve bolesti</a>
+        <a class="red-button" (click)="dobaviBolesti()">Izaberite bolest</a>
+        <a class="red-button">Moja dijagnoza</a></div>
+        <div *ngIf="operationNum==2">
+            <div *ngIf="allDiseases" class="lower">
+                <table class="table">
+                    <thead>
+                        <th>Sve bolesti vezane za izabrane simptome</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let diseaseAll of allDiseases">
+                        <td>
+                            {{diseaseAll.name}}
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="operationNum==3">  
+          <div class="lower">
+            <select class="form-control" (change)="getDiseaseSymptoms($event.target.value)">
+              <option [selected]="!diseaseSymptoms" disabled value=""></option>
+              <option *ngFor="let disease of diseases" value = "{{disease.id}}">{{disease.name}}</option>
+            </select>
+          </div>
+          <div *ngIf="diseaseSymptoms" class="lower">
+              <table class="table">
+                  <thead>
+                      <th>Simptomi</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let diseaseSymptom of diseaseSymptoms">
+                      <td>
+                          {{diseaseSymptom.symptom.name}}
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+</div>

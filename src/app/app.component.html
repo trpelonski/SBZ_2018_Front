@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand naslov" href="#">iDoctor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a href="#" class="navbar-left"><img src="assets/images/doctor.png" height="50" width="70"></a>
+    <ul class="navbar-nav mr-auto">
+      
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="">Pocetna stranica<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf = "!logovanKorisnik" class="nav-item">
+        <p class="navbar-text">Imate nalog?</p>
+      </li>
+      <li *ngIf = "!logovanKorisnik" class="nav-item">
+        <a class="nav-link" routerLink="login">Prijavite se</a>
+      </li>
+      <li *ngIf = "logovanKorisnik" class="nav-item">
+        <p class="navbar-text">Prijavljeni ste kao:</p>
+      </li>
+      <li *ngIf = "logovanKorisnik" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{logovanKorisnik.sub}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" *ngIf = "uloga==='1'" routerLink="dijagnoza">Dijagnoza</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'">Bolesti</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'">Simptomi</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" (click) = "odjava()">Odjavite se</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<router-outlet></router-outlet>
+
