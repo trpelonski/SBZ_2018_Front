@@ -9,6 +9,7 @@ import { DiagnosticService } from '../../services/diagnostic.service';
 export class LecenjeComponent implements OnInit {
 
   @Output() previousStepEmitter = new EventEmitter();
+  @Output() nextStepEmitter = new EventEmitter();
   private symptoms : any;
   private kartonBr: string;
   private diseases : any[];
@@ -16,17 +17,25 @@ export class LecenjeComponent implements OnInit {
   private selectedSymptoms : any[] = [];
   private diseaseSymptoms : any[];
   private allDiseases : any[];
+  private mostLikelyDiseases : any[];
+  private selectedDiseases : any[] = [];
 
   constructor(private diagnosticService : DiagnosticService) { }
 
   ngOnInit() {
     this.dobaviSimptome();
+    this.dobaviBolesti();
     this.kartonBr = this.diagnosticService.getPatient().stringId;
+    this.selectedSymptoms = this.diagnosticService.getSelectedSymptoms();
+    this.selectedDiseases = this.diagnosticService.getSelectedDiseases();
   }
 
   getMostLikelyDisease(){
+    this.operationNum = 1;
     this.diagnosticService.getMostLikelyDisease(this.selectedSymptoms).subscribe((res:any)=>{
-      console.log(res);
+      if(res.success){
+        this.mostLikelyDiseases = res.body;
+      }
     })
   }
 
@@ -47,12 +56,30 @@ export class LecenjeComponent implements OnInit {
     })
   }
 
+  showDiseaseSymptoms(){
+    this.diseaseSymptoms = null; 
+    this.operationNum = 3;
+  }
+
+  showMyDiagnostic(){
+    this.operationNum = 4;
+  }
+
   bindSymptom(symptom:any){
     var index = this.containsElement(this.selectedSymptoms,symptom);
     if(index==-1){
       this.selectedSymptoms.push(symptom);
     }else{
       this.selectedSymptoms.splice(index,1);
+    }
+  }
+
+  addOrRemoveSelectedDisease(disease:any){
+    var index = this.containsElement(this.selectedDiseases,disease);
+    if(index==-1){
+      this.selectedDiseases.push(disease);
+    }else{
+      this.selectedDiseases.splice(index,1);
     }
   }
 
@@ -69,8 +96,6 @@ export class LecenjeComponent implements OnInit {
   }
 
   dobaviBolesti(){
-    this.diseaseSymptoms = null; 
-    this.operationNum = 3;
     this.diagnosticService.getDiseases().subscribe((res:any)=>{
       if(res.success){
         this.diseases = res.body;
@@ -80,6 +105,12 @@ export class LecenjeComponent implements OnInit {
 
   ponisti(){
     this.operationNum = -1;
+  }
+
+  dalje(){
+    this.diagnosticService.setSelectedSymptoms(this.selectedSymptoms);
+    this.diagnosticService.setSelectedDiseases(this.selectedDiseases);
+    this.nextStepEmitter.emit();
   }
 
   containsElement(list:any[],element:any):number{

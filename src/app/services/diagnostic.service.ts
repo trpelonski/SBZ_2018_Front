@@ -5,6 +5,8 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 export class DiagnosticService {
 
   private patient : any;
+  private selectedSymptoms : any[] = [];
+  private selectedDiseases : any[] = [];
 
   constructor(private httpClient : HttpClient) { }
 
@@ -31,7 +33,7 @@ export class DiagnosticService {
   }
 
   getMostLikelyDisease(symptoms:any[]){
-    var diagnostic = {'patient' : this.patient, 'symptoms' : symptoms};
+    var diagnostic = {'patient' : this.patient, 'symptoms' : symptoms, 'diseases' : []};
     return this.httpClient.post('/app/secured/getMostLikelyDisease',diagnostic,{headers : this.postaviHeadere()});
   }
 
@@ -49,6 +51,22 @@ export class DiagnosticService {
 
   setPatient(patient : any){
     this.patient = patient;
+  }
+
+  getSelectedSymptoms() : any[]{
+    return this.selectedSymptoms;
+  }
+
+  setSelectedSymptoms(selectedSymptoms : any[]){
+    this.selectedSymptoms = selectedSymptoms;
+  }
+
+  getSelectedDiseases() : any[]{
+    return this.selectedDiseases;
+  }
+
+  setSelectedDiseases(selectedDiseases : any[]){
+    this.selectedDiseases = selectedDiseases;
   }
 
   postaviHeadere(){

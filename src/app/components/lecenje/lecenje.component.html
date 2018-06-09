@@ -4,19 +4,41 @@
       <h6>Izaberite simptome:</h6>
       <div class="scroll">
           <div *ngFor="let symptom of symptoms">
-            <input type="checkbox" (change)="bindSymptom(symptom)"/>
+            <input type="checkbox" (change)="bindSymptom(symptom)"  [checked]="containsElement(selectedSymptoms,symptom)!=-1"/>
             <label>{{symptom.name}}</label>
         </div>
       </div>
       <div class="column1 bottom custom-boxB"><a class="red-button" (click) = "previousStep()">Vrati se</a>
-        <a class="red-button">Dalje</a>
+        <a class="red-button" (click)="dalje()">Dalje</a>
         <a class="red-button" (click)="ponisti()">Ponisti</a></div>
   </div>
     <div class="boxB custom-boxB">
        <div> <a class="red-button" (click)="getMostLikelyDisease()">Najverovatnija bolest</a>
         <a [ngClass]="{'red-button' : selectedSymptoms.length!=0, 'red-button-disabled' : selectedSymptoms.length==0}" (click)="getSymptomsDisease()">Sve bolesti</a>
-        <a class="red-button" (click)="dobaviBolesti()">Izaberite bolest</a>
-        <a class="red-button">Moja dijagnoza</a></div>
+        <a class="red-button" (click)="showDiseaseSymptoms()">Izaberite bolest</a>
+        <a class="red-button" (click)="showMyDiagnostic()">Moja dijagnoza</a></div>
+        <div *ngIf="operationNum==1">
+            <div *ngIf="mostLikelyDiseases" class="lower">
+                <table class="table">
+                    <thead>
+                        <th>Najverovatnije bolesti</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="mostLikelyDiseases?.length === 0">Nema bolesti da se pokaze</tr>
+                      <tr *ngFor="let mostLikelyDisease of mostLikelyDiseases">
+                        <td>
+                            {{mostLikelyDisease.name}}
+                        </td>
+                        <td>
+                            <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,mostLikelyDisease)==-1" (click)="addOrRemoveSelectedDisease(mostLikelyDisease)">Izaberi</button>
+                            <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,mostLikelyDisease)!=-1" (click)="addOrRemoveSelectedDisease(mostLikelyDisease)">Ukloni</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div *ngIf="operationNum==2">
             <div *ngIf="allDiseases" class="lower">
                 <table class="table">
@@ -27,6 +49,10 @@
                       <tr *ngFor="let diseaseAll of allDiseases">
                         <td>
                             {{diseaseAll.name}}
+                        </td>
+                        <td>
+                            <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,diseaseAll)==-1" (click)="addOrRemoveSelectedDisease(diseaseAll)">Izaberi</button>
+                            <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,diseaseAll)!=-1" (click)="addOrRemoveSelectedDisease(diseaseAll)">Ukloni</button>
                         </td>
                       </tr>
                     </tbody>
@@ -55,5 +81,25 @@
               </table>
           </div>
         </div>
+        <div *ngIf="operationNum==4">
+                <div *ngIf="diseases" class="lower">
+                    <table class="table">
+                        <thead>
+                            <th>Izaberite bolesti</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let disease of diseases">
+                            <td>
+                                {{disease.name}}
+                            </td>
+                            <td>
+                                <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,disease)==-1" (click)="addOrRemoveSelectedDisease(disease)">Izaberi</button>
+                                <button class="redBtn btn btn-primary" *ngIf="containsElement(selectedDiseases,disease)!=-1" (click)="addOrRemoveSelectedDisease(disease)">Ukloni</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 </div>
