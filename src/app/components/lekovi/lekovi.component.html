@@ -1,4 +1,46 @@
-<p>
-  lekovi works!
-</p>
-<div class="column1 bottom custom-boxB"><a class="red-button" (click) = "previousStep()">Vrati se</a>
+<div class="container">
+  <alert></alert>
+  <h3 class="set-center">Izaberite lekove</h3>
+  <!--<div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Pronadjite lekove" aria-label="kriterijumLekovi" aria-describedby="basic-addon2" [(ngModel)] = "searchLekoviText">
+      <div class="input-group-append">
+          <button class="btn btn-primary redBtn" type="button" (click) = "pretraziLekove()">Pretrazi</button>
+      </div>
+      <div class="input-group-append">
+          <button class="btn btn-primary redBtn" type="button" (click) = "osveziLekove()">Osvezi</button>
+      </div>
+  </div>-->
+  <div class="container">
+    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Naziv</th>
+            <th scope="col">Tip</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="medications==null || medications?.length === 0">Nema lekova da se pokaze</tr>
+              <tr *ngFor="let medication of medications" [ngClass] = "{'selected-row' : containsElement(selectedMedications,medication)!=-1}" (click)="selectMedication(medication)">
+                <td>{{medication.name}}</td>
+                <td>{{medication.type.name}}</td>
+                <td><div *ngIf="containsElement(allergicTo,medication)!=-1"><img src="assets/images/block.png" height="16" width="16"/></div></td>
+            </tr>    
+         </tbody>
+       </table>
+         <!-- <div>
+            <button class="btn btn-info right-items redBtn" (click)="nextLekovi()">&#x21E8;</button>
+            <button class="btn btn-info right-items redBtn">{{lekoviStranica}}</button>
+            <button class="btn btn-info right-items redBtn" (click)="prevLekovi()">&#x21E6;</button>
+          </div>-->
+      </div>
+      <div class="column1 bottom"><a class="red-button" (click) = "previousStep()">Vrati se</a>
+      <a [ngClass]="{'red-button' : selectedMedications?.length!=0, 'red-button-disabled' : selectedMedications?.length==0}" (click) = "validiraj()">Validiraj</a>
+      <a [ngClass]="{'red-button' : isNextAvailable(), 'red-button-disabled' : !isNextAvailable()}" (click) = "isNextAvailable() ? setData(): false">Dalje</a></div>
+  </div>
+</div>
+  
+
+
+

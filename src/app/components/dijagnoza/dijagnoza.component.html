@@ -1,3 +1,4 @@
 <app-pacijenti *ngIf="step===1" (nextStepEmitter)="nextStep()"></app-pacijenti>
 <app-lecenje *ngIf="step===2" (previousStepEmitter)="previousStep()" (nextStepEmitter)="nextStep()"></app-lecenje>
-<app-lekovi *ngIf="step===3" (previousStepEmitter)="previousStep()"></app-lekovi>
+<app-lekovi *ngIf="step===3" (previousStepEmitter)="previousStep()" (nextStepEmitter)="nextStep()"></app-lekovi>
+<app-potvrda *ngIf="step===4" (previousStepEmitter)="previousStep()"></app-potvrda>

@@ -7,6 +7,7 @@ export class DiagnosticService {
   private patient : any;
   private selectedSymptoms : any[] = [];
   private selectedDiseases : any[] = [];
+  private selectedMediacations : any[] = [];
 
   constructor(private httpClient : HttpClient) { }
 
@@ -35,6 +36,11 @@ export class DiagnosticService {
   getMostLikelyDisease(symptoms:any[]){
     var diagnostic = {'patient' : this.patient, 'symptoms' : symptoms, 'diseases' : []};
     return this.httpClient.post('/app/secured/getMostLikelyDisease',diagnostic,{headers : this.postaviHeadere()});
+  }
+
+  CheckAlergicTo(medications:any[]){
+    var medicationDTO = {'antibiotics' : medications, 'allergicTo' : [], patient : this.patient};
+    return this.httpClient.post('/app/secured/checkAllergicTo',medicationDTO,{headers : this.postaviHeadere()});
   }
 
   getDiseaseSymptoms(diseaseId:number){
@@ -67,6 +73,14 @@ export class DiagnosticService {
 
   setSelectedDiseases(selectedDiseases : any[]){
     this.selectedDiseases = selectedDiseases;
+  }
+
+  getSelectedMedications() : any[]{
+    return this.selectedMediacations;
+  }
+
+  setSelectedMedications(selectedMediacations : any[]){
+    this.selectedMediacations = selectedMediacations;
   }
 
   postaviHeadere(){

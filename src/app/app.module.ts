@@ -15,6 +15,7 @@ import { PacijentiComponent } from './components/pacijenti/pacijenti.component';
 import { DiagnosticService } from './services/diagnostic.service';
 import { LecenjeComponent } from './components/lecenje/lecenje.component';
 import { LekoviComponent } from './components/lekovi/lekovi.component';
+import { PotvrdaComponent } from './components/potvrda/potvrda.component';
 
 
 var routes = [
@@ -42,7 +43,8 @@ var routes = [
     DijagnozaComponent,
     PacijentiComponent,
     LecenjeComponent,
-    LekoviComponent
+    LekoviComponent,
+    PotvrdaComponent
   ],
   imports: [
     BrowserModule,
