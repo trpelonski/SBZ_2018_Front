@@ -1,5 +1,28 @@
-<p>
-  potvrda works!
-</p>
-<div class="column1 bottom"><a class="red-button" (click) = "previousStep()">Vrati se</a>
-<a class="red-button">Potvrda</a></div>
+<div class="container">
+  <div class="column1">
+      <div class="bordered">
+          <p><b>Pacijent</b><p>
+          <hr>
+          <p><b>Ime : </b>{{patient.firstname}}</p>
+          <p><b>Prezime : </b>{{patient.lastname}}</p>
+          <p><b>Broj kartona : </b>{{patient.stringId}}</p>
+      </div>
+      <div class="bordered">
+          <p><b> Simptomi : </b>{{symptoms | symptomsPipe}}</p>
+      </div>
+      <div class="bordered">
+          <p><b> Bolesti : </b>{{diseases | diseasesPipe}}</p>
+      </div>
+      <div class="bordered">
+          <p><b> Lekovi : </b>{{medications | medicationsPipe}}</p>
+      </div>
+      <div>
+          <label for="komentar"><b>Komentar : </b></label>
+          <textarea class="form-control" id="komentar" rows="3" [(ngModel)]="description"></textarea>
+      </div>
+  </div>
+  <div class="boxA custom-boxA">
+      <a class="red-button" (click) = "previousStep()">Vrati se</a>
+      <a class="red-button" (click) = "potvrda()">Potvrda</a>
+  </div>
+</div>

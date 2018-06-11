@@ -49,7 +49,7 @@ export class LecenjeComponent implements OnInit {
 
   getSymptomsDisease(){
     this.operationNum=2;
-    this.diagnosticService.getgetSymptomsDiseases(this.selectedSymptoms).subscribe((res:any)=>{
+    this.diagnosticService.getSymptomsDiseases(this.selectedSymptoms).subscribe((res:any)=>{
       if(res.success){
         this.allDiseases = res.body;
       } 
@@ -104,6 +104,7 @@ export class LecenjeComponent implements OnInit {
   }
 
   ponisti(){
+    this.selectedDiseases = [];
     this.operationNum = -1;
   }
 

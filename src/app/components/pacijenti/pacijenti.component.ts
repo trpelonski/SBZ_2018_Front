@@ -103,7 +103,7 @@ export class PacijentiComponent implements OnInit {
   }
 
   osveziPacijente = function(){
-    this.searchPacijenti = true;
+    this.searchPacijenti = false;
     this.pacijentiStranica = 1;
     this.searchPacijentiZaSlanje = "";
     this.searchPacijentiText = "";

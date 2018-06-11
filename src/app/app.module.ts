@@ -16,6 +16,10 @@ import { DiagnosticService } from './services/diagnostic.service';
 import { LecenjeComponent } from './components/lecenje/lecenje.component';
 import { LekoviComponent } from './components/lekovi/lekovi.component';
 import { PotvrdaComponent } from './components/potvrda/potvrda.component';
+import { MedicationsPipe } from './pipes/medications.pipe';
+import { DiseasesPipe } from './pipes/diseases.pipe';
+import { SymptomsPipe } from './pipes/symptoms.pipe';
+import { IzvestajiComponent } from './components/izvestaji/izvestaji.component';
 
 
 var routes = [
@@ -30,6 +34,10 @@ var routes = [
   {
     path : 'dijagnoza',
     component : DijagnozaComponent
+  },
+  {
+    path : 'izvestaji',
+    component : IzvestajiComponent
   }
 ]
 
@@ -44,7 +52,11 @@ var routes = [
     PacijentiComponent,
     LecenjeComponent,
     LekoviComponent,
-    PotvrdaComponent
+    PotvrdaComponent,
+    MedicationsPipe,
+    DiseasesPipe,
+    SymptomsPipe,
+    IzvestajiComponent,
   ],
   imports: [
     BrowserModule,

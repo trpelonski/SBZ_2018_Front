@@ -29,8 +29,14 @@ export class DiagnosticService {
     return this.httpClient.get('/app/secured/getDiseases',{headers : this.postaviHeadere()});
   }
 
-  getMedications(){
-    return this.httpClient.get('/app/secured/getMedications',{headers : this.postaviHeadere()});
+  getMedications(page:number){
+    return this.httpClient.get('/app/secured/getMedications/'+page,{headers : this.postaviHeadere()});
+  }
+
+  findMedications(page:number, name:string){
+    let params = new HttpParams();   
+    params = params.append('name', name);
+    return this.httpClient.get('/app/secured/findMedications/'+page,{params: params, headers : this.postaviHeadere()});
   }
 
   getMostLikelyDisease(symptoms:any[]){
@@ -47,9 +53,15 @@ export class DiagnosticService {
     return this.httpClient.get('/app/secured/getDiseaseSymptoms/'+diseaseId,{headers : this.postaviHeadere()});
   }
 
-  getgetSymptomsDiseases(symptoms:any[]){
+  getSymptomsDiseases(symptoms:any[]){
     return this.httpClient.post('/app/secured/getSymptomsDiseases',symptoms,{headers : this.postaviHeadere()});
   }
+
+  insertDiagnostic(description:string){
+    var diagnostic = {'patient' : this.patient, 'symptoms' : this.selectedSymptoms, 'diseases' : this.selectedDiseases, 'medications' : this.selectedMediacations, 'description' : description};
+    return this.httpClient.post('app/secured/createDiagnostic',diagnostic,{headers : this.postaviHeadere()});
+  }
+
 
   getPatient() : any{
     return this.patient;

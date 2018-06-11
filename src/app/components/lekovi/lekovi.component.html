@@ -1,7 +1,7 @@
 <div class="container">
   <alert></alert>
   <h3 class="set-center">Izaberite lekove</h3>
-  <!--<div class="input-group mb-3">
+  <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Pronadjite lekove" aria-label="kriterijumLekovi" aria-describedby="basic-addon2" [(ngModel)] = "searchLekoviText">
       <div class="input-group-append">
           <button class="btn btn-primary redBtn" type="button" (click) = "pretraziLekove()">Pretrazi</button>
@@ -9,7 +9,7 @@
       <div class="input-group-append">
           <button class="btn btn-primary redBtn" type="button" (click) = "osveziLekove()">Osvezi</button>
       </div>
-  </div>-->
+  </div>
   <div class="container">
     <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
       <table class="table">
@@ -29,11 +29,11 @@
             </tr>    
          </tbody>
        </table>
-         <!-- <div>
+         <div>
             <button class="btn btn-info right-items redBtn" (click)="nextLekovi()">&#x21E8;</button>
             <button class="btn btn-info right-items redBtn">{{lekoviStranica}}</button>
             <button class="btn btn-info right-items redBtn" (click)="prevLekovi()">&#x21E6;</button>
-          </div>-->
+          </div>
       </div>
       <div class="column1 bottom"><a class="red-button" (click) = "previousStep()">Vrati se</a>
       <a [ngClass]="{'red-button' : selectedMedications?.length!=0, 'red-button-disabled' : selectedMedications?.length==0}" (click) = "validiraj()">Validiraj</a>

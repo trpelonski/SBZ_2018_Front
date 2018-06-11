@@ -170,3 +170,16 @@ a.submit-button
     padding: 1px 15px 3px 2px;
     border-radius:50px;
 }
+
+.bordered
+{
+	border-color : #e5f2ff;
+	border-style : solid;
+	border-width : 2px;
+	margin-bottom : 1em;
+	padding-top : 1em;
+}
+
+.bordered p{
+	padding-left : 1em;
+}
