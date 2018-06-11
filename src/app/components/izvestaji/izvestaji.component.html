@@ -1,3 +1,81 @@
-<p>
-  izvestaji works!
-</p>
+<div class="container">
+    <div class="container">	
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item myPill"><a class="nav-link active" id="tab1" data-toggle="pill" href="#hronicni" role="tab" aria-controls="tab1aria" aria-selected="true" (click) = "getPotentialChronicDiseasePatients()">Sa mogucim hronicnim oboljenjima</a></li>
+            <li class="nav-item myPill"><a class="nav-link" id="tab2" data-toggle="pill" href="#zavisnici" role="tab" aria-controls="tab2aria" aria-selected="false" (click) = "getPotentialAddicts()">Moguci zavisnici</a></li>
+            <li class="nav-item myPill"><a class="nav-link" id="tab3" data-toggle="pill" href="#imunitet" role="tab" aria-controls="tab3aria" aria-selected="false" (click) = "getPotentialWeakImmunityPatients()">Oslabljen imunitet</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="hronicni" role="tabpanel" aria-labelledby="tab1aria">
+                <div class="container">
+                    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Ime</th>
+                              <th scope="col">Prezime</th>
+                              <th scope="col">Broj kartona</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngIf="hronicni==null || hronicni?.length === 0">Nema pacijenata sa potencijalnim hronicnim oboljenjima</tr>
+                                <tr *ngFor="let pacient of hronicni">
+                                  <td>{{pacient.firstname}}</td>
+                                  <td>{{pacient.lastname}}</td>
+                                  <td>{{pacient.stringId}}</td>
+                              </tr>    
+                           </tbody>
+                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="zavisnici" role="tabpanel" aria-labelledby="tab2aria">
+                <div class="container">
+                    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Ime</th>
+                              <th scope="col">Prezime</th>
+                              <th scope="col">Broj kartona</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngIf="zavisnici==null || zavisnici?.length === 0">Nema pacijenata koji su potencijalni zavisnici</tr>
+                                <tr *ngFor="let pacient of zavisnici">
+                                  <td>{{pacient.firstname}}</td>
+                                  <td>{{pacient.lastname}}</td>
+                                  <td>{{pacient.stringId}}</td>
+                              </tr>    
+                           </tbody>
+                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="imunitet" role="tabpanel" aria-labelledby="tab3aria">
+                <div class="container">
+                    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Ime</th>
+                              <th scope="col">Prezime</th>
+                              <th scope="col">Broj kartona</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngIf="imunitet==null || imunitet?.length === 0">Nema pacijenata sa oslabljenim imunitetom</tr>
+                                <tr *ngFor="let pacient of imunitet">
+                                  <td>{{pacient.firstname}}</td>
+                                  <td>{{pacient.lastname}}</td>
+                                  <td>{{pacient.stringId}}</td>
+                              </tr>    
+                           </tbody>
+                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

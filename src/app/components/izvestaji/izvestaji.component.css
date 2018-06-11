@@ -1,0 +1,14 @@
+.nav-link{
+    color : black;
+    font-weight: bold;
+  }
+
+.nav-pills .myPill .nav-link:not(.active) {
+  background-color: white
+}
+
+.nav-pills .myPill .nav-link {
+  background-color: #ec0d0d;
+}
+
+ 

@@ -20,6 +20,7 @@ import { MedicationsPipe } from './pipes/medications.pipe';
 import { DiseasesPipe } from './pipes/diseases.pipe';
 import { SymptomsPipe } from './pipes/symptoms.pipe';
 import { IzvestajiComponent } from './components/izvestaji/izvestaji.component';
+import { ReportService } from './services/report.service';
 
 
 var routes = [
@@ -65,7 +66,7 @@ var routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AlertService,LoginService, DiagnosticService],
+  providers: [AlertService,LoginService, DiagnosticService, ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
