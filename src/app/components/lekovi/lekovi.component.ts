@@ -17,6 +17,7 @@ export class LekoviComponent implements OnInit {
   private searchLekovi: boolean = false;
   private searchLekoviText : string = "";
   private searchLekoviZaSlanje : string = "";
+  private diagnosticDiseases : any[] = [];
 
   @Output() previousStepEmitter = new EventEmitter();
   @Output() nextStepEmitter = new EventEmitter();
@@ -26,6 +27,8 @@ export class LekoviComponent implements OnInit {
   ngOnInit() {
     this.dobaviLekove();
     this.selectedMedications = this.diagnosticService.getSelectedMedications();
+    this.createDiagnoscicDiseases();
+    console.log(this.diagnosticDiseases);
   }
 
   previousStep(){
@@ -141,6 +144,15 @@ export class LekoviComponent implements OnInit {
     this.searchLekoviZaSlanje = "";
     this.searchLekoviText = "";
     this.dobaviLekove();
+  }
+
+  createDiagnoscicDiseases(){
+    var diseases = this.diagnosticService.getSelectedDiseases();
+
+    for(let disease of diseases){
+      var diagnosticDisease = {disease : disease, medications : []}
+      this.diagnosticDiseases.push(diagnosticDisease);
+    }
   }
 
   containsElement(list:any[],element:any):number{

@@ -10,6 +10,13 @@
           <button class="btn btn-primary redBtn" type="button" (click) = "osveziLekove()">Osvezi</button>
       </div>
   </div>
+  <div class="col-lg-6 mx-auto">
+      <h5 class="set-center">Izaberite bolest</h5>
+      <select class="form-control">
+          <option selected disabled value=""></option>
+          <option *ngFor="let diagnosticDisease of diagnosticDiseases" [ngValue] = "diagnosticDisease.disease">{{diagnosticDisease.disease.name}}</option>
+      </select>
+    </div>
   <div class="container">
     <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
       <table class="table">

@@ -40,7 +40,7 @@ export class DiagnosticService {
   }
 
   getMostLikelyDisease(symptoms:any[]){
-    var diagnostic = {'patient' : this.patient, 'symptoms' : symptoms, 'diseases' : []};
+    var diagnostic = {'patient' : this.patient, 'symptoms' : symptoms, 'diagnosticDiseases' : []};
     return this.httpClient.post('/app/secured/getMostLikelyDisease',diagnostic,{headers : this.postaviHeadere()});
   }
 
