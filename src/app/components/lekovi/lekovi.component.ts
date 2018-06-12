@@ -10,14 +10,12 @@ import { AlertService } from '../../services/alert.service';
 export class LekoviComponent implements OnInit {
 
   private medications : any[];
-  private selectedMedications : any[] = [];
-  private valid : number = 0;
-  private allergicTo : any[] = [];
   private lekoviStranica : number = 1;
   private searchLekovi: boolean = false;
   private searchLekoviText : string = "";
   private searchLekoviZaSlanje : string = "";
   private diagnosticDiseases : any[] = [];
+  private activeDisease : any;
 
   @Output() previousStepEmitter = new EventEmitter();
   @Output() nextStepEmitter = new EventEmitter();
@@ -26,9 +24,7 @@ export class LekoviComponent implements OnInit {
 
   ngOnInit() {
     this.dobaviLekove();
-    this.selectedMedications = this.diagnosticService.getSelectedMedications();
     this.createDiagnoscicDiseases();
-    console.log(this.diagnosticDiseases);
   }
 
   previousStep(){
@@ -92,39 +88,62 @@ export class LekoviComponent implements OnInit {
   }
 
   selectMedication(medication:any){
-    var index = this.containsElement(this.selectedMedications,medication);
+    var index = this.containsElement(this.activeDisease.medications,medication);
     if(index==-1){
-      this.valid++;
-      this.selectedMedications.push(medication);
+      this.activeDisease.valid++;
+      this.activeDisease.medications.push(medication);
     }else{
-      this.selectedMedications.splice(index,1);
-      if(this.valid>0){
-        this.valid--;
+      this.activeDisease.medications.splice(index,1);
+      if(this.activeDisease.valid>0){
+        this.activeDisease.valid--;
       }
       
     }
-
-    index = this.containsElement(this.allergicTo,medication);
+    index = this.containsElement(this.activeDisease.allergicTo,medication);
     if(index!=-1){
-      this.allergicTo.splice(index,1);
+      this.activeDisease.allergicTo.splice(index,1);
     }  
   }
 
+  createDiagnoscicDiseases(){
+    var diseases = this.diagnosticService.getSelectedDiseases();
+
+    for(let disease of diseases){
+      var diagnosticDisease = {disease : disease, medications : [], valid : 0, allergicTo : []}
+      this.diagnosticDiseases.push(diagnosticDisease);
+    }
+  }
+
+  changeActiveDisease(id:any){
+
+    for(let diagnosticDisease of this.diagnosticDiseases){
+      if(diagnosticDisease.disease.id==id){
+        this.activeDisease = diagnosticDisease;
+        break;
+      }
+    }
+  }
+
   isNextAvailable(){
-    return this.valid==0 && this.allergicTo.length==0;
+    for(let diagnosticDisease of this.diagnosticDiseases){
+      if(diagnosticDisease.valid!=0 || diagnosticDisease.allergicTo.length!=0){
+        return false;
+      }
+    }
+    return true;
   }
 
   setData(){
-    this.diagnosticService.setSelectedMedications(this.selectedMedications);
+    this.diagnosticService.setDiagnosticDiseases(this.diagnosticDiseases);
     this.nextStepEmitter.emit();
   }
 
   validiraj(){
-    this.diagnosticService.CheckAlergicTo(this.selectedMedications).subscribe((res:any)=>{
+    this.diagnosticService.CheckAlergicTo(this.activeDisease.medications).subscribe((res:any)=>{
       if(res.success){
-        this.allergicTo = res.body.allergicTo;
-        this.valid = 0;
-        if(this.allergicTo.length!=0){
+        this.activeDisease.allergicTo = res.body.allergicTo;
+        this.activeDisease.valid = 0;
+        if(this.activeDisease.allergicTo.length!=0){
           this.alertService.error("Pacijent je alergican na oznacene lekove ili sastojke u njima! Uklonite ove lekove da biste mogli da nastavite");
         }
       }
@@ -144,15 +163,6 @@ export class LekoviComponent implements OnInit {
     this.searchLekoviZaSlanje = "";
     this.searchLekoviText = "";
     this.dobaviLekove();
-  }
-
-  createDiagnoscicDiseases(){
-    var diseases = this.diagnosticService.getSelectedDiseases();
-
-    for(let disease of diseases){
-      var diagnosticDisease = {disease : disease, medications : []}
-      this.diagnosticDiseases.push(diagnosticDisease);
-    }
   }
 
   containsElement(list:any[],element:any):number{

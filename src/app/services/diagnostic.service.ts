@@ -7,7 +7,7 @@ export class DiagnosticService {
   private patient : any;
   private selectedSymptoms : any[] = [];
   private selectedDiseases : any[] = [];
-  private selectedMediacations : any[] = [];
+  private diagnosticDiseases : any[] = [];
 
   constructor(private httpClient : HttpClient) { }
 
@@ -58,10 +58,9 @@ export class DiagnosticService {
   }
 
   insertDiagnostic(description:string){
-    var diagnostic = {'patient' : this.patient, 'symptoms' : this.selectedSymptoms, 'diseases' : this.selectedDiseases, 'medications' : this.selectedMediacations, 'description' : description};
+    var diagnostic = {'patient' : this.patient, 'symptoms' : this.selectedSymptoms, 'diseases' : this.selectedDiseases, 'diagnosticDiseases' : this.diagnosticDiseases, 'description' : description};
     return this.httpClient.post('app/secured/createDiagnostic',diagnostic,{headers : this.postaviHeadere()});
   }
-
 
   getPatient() : any{
     return this.patient;
@@ -87,12 +86,12 @@ export class DiagnosticService {
     this.selectedDiseases = selectedDiseases;
   }
 
-  getSelectedMedications() : any[]{
-    return this.selectedMediacations;
+  getDiagnosticDiseases() : any[]{
+    return this.diagnosticDiseases;
   }
 
-  setSelectedMedications(selectedMediacations : any[]){
-    this.selectedMediacations = selectedMediacations;
+  setDiagnosticDiseases(diagnosticDiseases : any[]){
+    this.diagnosticDiseases = diagnosticDiseases;
   }
 
   postaviHeadere(){

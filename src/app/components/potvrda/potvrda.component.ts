@@ -12,17 +12,15 @@ export class PotvrdaComponent implements OnInit {
   @Output() previousStepEmitter = new EventEmitter();
   private description : string = "";
   private patient : any = {};
-  private diseases : any[] = [];
   private symptoms : any[] = [];
-  private medications : any[] = [];
+  private diagnosticDiseases : any[] = [];
 
   constructor(private diagnosticService : DiagnosticService, private router : Router) { }
 
   ngOnInit() {
     this.patient = this.diagnosticService.getPatient();
-    this.diseases = this.diagnosticService.getSelectedDiseases();
+    this.diagnosticDiseases = this.diagnosticService.getDiagnosticDiseases();
     this.symptoms = this.diagnosticService.getSelectedSymptoms();
-    this.medications = this.diagnosticService.getSelectedMedications();
   }
 
   potvrda(){

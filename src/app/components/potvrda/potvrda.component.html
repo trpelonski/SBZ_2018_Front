@@ -11,10 +11,10 @@
           <p><b> Simptomi : </b>{{symptoms | symptomsPipe}}</p>
       </div>
       <div class="bordered">
-          <p><b> Bolesti : </b>{{diseases | diseasesPipe}}</p>
-      </div>
-      <div class="bordered">
-          <p><b> Lekovi : </b>{{medications | medicationsPipe}}</p>
+          <p><b>Bolesti</b><p>
+          <hr>
+          <p *ngFor="let diagnosticDisease of diagnosticDiseases"><b>{{diagnosticDisease.disease.name}}</b>
+        <b *ngIf="diagnosticDisease.medications.length!=0">- lekovi: </b>{{diagnosticDisease.medications | medicationsPipe}}</p>
       </div>
       <div>
           <label for="komentar"><b>Komentar : </b></label>

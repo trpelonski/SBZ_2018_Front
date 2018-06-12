@@ -1,7 +1,14 @@
 <div class="container">
   <alert></alert>
-  <h3 class="set-center">Izaberite lekove</h3>
-  <div class="input-group mb-3">
+  <div class="col-lg-6 mx-auto">
+      <h5 class="set-center">Izaberite bolest pa izaberite lekove </h5>
+      <select class="form-control" (change)="changeActiveDisease($event.target.value)">
+          <option selected disabled value=""></option>
+          <option *ngFor="let diagnosticDisease of diagnosticDiseases" value="{{diagnosticDisease.disease.id}}">{{diagnosticDisease.disease.name}}</option>
+      </select>
+    </div>
+    <br>
+  <div *ngIf="activeDisease" class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Pronadjite lekove" aria-label="kriterijumLekovi" aria-describedby="basic-addon2" [(ngModel)] = "searchLekoviText">
       <div class="input-group-append">
           <button class="btn btn-primary redBtn" type="button" (click) = "pretraziLekove()">Pretrazi</button>
@@ -10,15 +17,9 @@
           <button class="btn btn-primary redBtn" type="button" (click) = "osveziLekove()">Osvezi</button>
       </div>
   </div>
-  <div class="col-lg-6 mx-auto">
-      <h5 class="set-center">Izaberite bolest</h5>
-      <select class="form-control">
-          <option selected disabled value=""></option>
-          <option *ngFor="let diagnosticDisease of diagnosticDiseases" [ngValue] = "diagnosticDisease.disease">{{diagnosticDisease.disease.name}}</option>
-      </select>
-    </div>
+  
   <div class="container">
-    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+    <div *ngIf="activeDisease" class="card card-block bg-faded pozadina col-lg-12 gap-top">
       <table class="table">
         <thead>
           <tr>
@@ -29,10 +30,10 @@
         </thead>
         <tbody>
           <tr *ngIf="medications==null || medications?.length === 0">Nema lekova da se pokaze</tr>
-              <tr *ngFor="let medication of medications" [ngClass] = "{'selected-row' : containsElement(selectedMedications,medication)!=-1}" (click)="selectMedication(medication)">
+              <tr *ngFor="let medication of medications" [ngClass] = "{'selected-row' : containsElement(activeDisease?.medications,medication)!=-1}" (click)="selectMedication(medication)">
                 <td>{{medication.name}}</td>
                 <td>{{medication.type.name}}</td>
-                <td><div *ngIf="containsElement(allergicTo,medication)!=-1"><img src="assets/images/block.png" height="16" width="16"/></div></td>
+                <td><div *ngIf="containsElement(activeDisease?.allergicTo,medication)!=-1"><img src="assets/images/block.png" height="16" width="16"/></div></td>
             </tr>    
          </tbody>
        </table>
@@ -43,7 +44,7 @@
           </div>
       </div>
       <div class="column1 bottom"><a class="red-button" (click) = "previousStep()">Vrati se</a>
-      <a [ngClass]="{'red-button' : selectedMedications?.length!=0, 'red-button-disabled' : selectedMedications?.length==0}" (click) = "validiraj()">Validiraj</a>
+      <a [ngClass]="{'red-button' : activeDisease?.valid!=0, 'red-button-disabled' : activeDisease?.valid==0}" (click) = "validiraj()">Validiraj</a>
       <a [ngClass]="{'red-button' : isNextAvailable(), 'red-button-disabled' : !isNextAvailable()}" (click) = "isNextAvailable() ? setData(): false">Dalje</a></div>
   </div>
 </div>
