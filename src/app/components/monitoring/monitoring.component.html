@@ -1,8 +1,10 @@
 <div class="container mx-auto">
-    <div *ngFor="let alert of alerts" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div *ngFor="let alert of alerts;let i = index" class="alert alert-danger alert-dismissible fade show" role="alert">
         {{alert}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeAlert(alert)">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeAlert(i)">
             <span aria-hidden="true">&times;</span>
           </button>
     </div>
+    <a class="red-button" (click)="start()">Zapocni</a>
+    <a class="red-button" (click)="stop()">Zaustavi</a>
 </div>

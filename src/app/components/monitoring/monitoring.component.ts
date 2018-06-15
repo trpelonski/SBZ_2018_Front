@@ -14,15 +14,22 @@ export class MonitoringComponent implements OnInit {
 
   ngOnInit() {
     this.socketService.initSocket();
+  }
+
+  removeAlert(index:number){
+    this.alerts.splice(index,1);
+  }
+
+  start(){
+    var message = {token:localStorage.getItem('logovanKorisnik')};
+    this.socketService.send(message);
 
     this.socketService.getSocket().onmessage = (event) => { 
       this.alerts.push(event.data);
     }
-
   }
 
-  removeAlert(alert:string){
-    var index = this.alerts.indexOf(alert);
-    this.alerts.splice(index,1);
+  stop(){
+    this.socketService.closeSocket();
   }
 }
