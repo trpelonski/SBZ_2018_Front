@@ -25,6 +25,7 @@ import { LekoviCrudComponent } from './components/lekovi-crud/lekovi-crud.compon
 import { SubstanceCrudComponent } from './components/substance-crud/substance-crud.component';
 import { BolestiCrudComponent } from './components/bolesti-crud/bolesti-crud.component';
 import { SimptomiCrudComponent } from './components/simptomi-crud/simptomi-crud.component';
+import { CrudService } from './services/crud.service';
 
 
 var routes = [
@@ -90,7 +91,7 @@ var routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AlertService,LoginService, DiagnosticService, ReportService],
+  providers: [AlertService,LoginService, DiagnosticService, ReportService, CrudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
