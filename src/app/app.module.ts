@@ -26,6 +26,9 @@ import { SubstanceCrudComponent } from './components/substance-crud/substance-cr
 import { BolestiCrudComponent } from './components/bolesti-crud/bolesti-crud.component';
 import { SimptomiCrudComponent } from './components/simptomi-crud/simptomi-crud.component';
 import { CrudService } from './services/crud.service';
+import { AppLoadModule } from './appLoadModule';
+import { MonitoringComponent } from './components/monitoring/monitoring.component';
+import { SocketService } from './services/socket.service';
 
 
 var routes = [
@@ -44,6 +47,10 @@ var routes = [
   {
     path : 'izvestaji',
     component : IzvestajiComponent
+  },
+  {
+    path : 'monitoring',
+    component : MonitoringComponent
   },
   {
     path : 'lekovi',
@@ -83,15 +90,17 @@ var routes = [
     SubstanceCrudComponent,
     BolestiCrudComponent,
     SimptomiCrudComponent,
+    MonitoringComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AppLoadModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AlertService,LoginService, DiagnosticService, ReportService, CrudService],
+  providers: [AlertService,LoginService, DiagnosticService, ReportService, CrudService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
