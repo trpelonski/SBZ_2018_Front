@@ -21,6 +21,10 @@ import { DiseasesPipe } from './pipes/diseases.pipe';
 import { SymptomsPipe } from './pipes/symptoms.pipe';
 import { IzvestajiComponent } from './components/izvestaji/izvestaji.component';
 import { ReportService } from './services/report.service';
+import { LekoviCrudComponent } from './components/lekovi-crud/lekovi-crud.component';
+import { SubstanceCrudComponent } from './components/substance-crud/substance-crud.component';
+import { BolestiCrudComponent } from './components/bolesti-crud/bolesti-crud.component';
+import { SimptomiCrudComponent } from './components/simptomi-crud/simptomi-crud.component';
 
 
 var routes = [
@@ -39,6 +43,22 @@ var routes = [
   {
     path : 'izvestaji',
     component : IzvestajiComponent
+  },
+  {
+    path : 'lekovi',
+    component : LekoviCrudComponent
+  },
+  {
+    path : 'substance',
+    component : SubstanceCrudComponent
+  },
+  {
+    path : 'bolesti',
+    component : BolestiCrudComponent
+  },
+  {
+    path : 'simptomi',
+    component : SimptomiCrudComponent
   }
 ]
 
@@ -58,6 +78,10 @@ var routes = [
     DiseasesPipe,
     SymptomsPipe,
     IzvestajiComponent,
+    LekoviCrudComponent,
+    SubstanceCrudComponent,
+    BolestiCrudComponent,
+    SimptomiCrudComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,8 +29,10 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" *ngIf = "uloga==='1'" routerLink="dijagnoza">Dijagnoza</a>
           <a class="dropdown-item" *ngIf = "uloga==='1'" routerLink="izvestaji">Izvestaji</a>
-          <a class="dropdown-item" *ngIf = "uloga==='2'">Bolesti</a>
-          <a class="dropdown-item" *ngIf = "uloga==='2'">Simptomi</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'" routerLink="bolesti">Bolesti</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'" routerLink="simptomi">Simptomi</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'" routerLink="lekovi">Lekovi</a>
+          <a class="dropdown-item" *ngIf = "uloga==='2'" routerLink="substance">Substance</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" (click) = "odjava()">Odjavite se</a>
         </div>
