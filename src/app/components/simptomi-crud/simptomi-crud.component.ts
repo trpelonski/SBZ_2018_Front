@@ -21,7 +21,6 @@ export class SimptomiCrudComponent implements OnInit {
     this.crudService.getSymptoms(this.simptomiStranica).subscribe((res:any)=>{
       if(res.success){
         this.simptomi = res.body.content;
-        console.log(this.simptomi);
       }
     })
   }

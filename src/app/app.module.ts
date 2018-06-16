@@ -29,6 +29,8 @@ import { CrudService } from './services/crud.service';
 import { AppLoadModule } from './appLoadModule';
 import { MonitoringComponent } from './components/monitoring/monitoring.component';
 import { SocketService } from './services/socket.service';
+import { SubstancesPipe } from './pipes/substances.pipe';
+import { DiseaseSymptomsPipe } from './pipes/disease-symptoms.pipe';
 
 
 var routes = [
@@ -91,6 +93,8 @@ var routes = [
     BolestiCrudComponent,
     SimptomiCrudComponent,
     MonitoringComponent,
+    SubstancesPipe,
+    DiseaseSymptomsPipe,
   ],
   imports: [
     BrowserModule,

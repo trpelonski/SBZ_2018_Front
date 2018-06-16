@@ -1,3 +1,28 @@
-<p>
-  bolesti-crud works!
-</p>
+<div class="container">
+    <div class="card card-block bg-faded pozadina col-lg-12 gap-top">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Naziv</th>
+            <th scope="col">Kodni naziv</th>
+            <th scope="col">Simptomi</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="bolesti==null || bolesti?.length === 0">Nema bolesti da se pokaze</tr>
+              <tr *ngFor="let bolest of bolesti; let i = index">
+                <td>{{bolest.name}}</td>
+                <td>{{bolest.codeName}}</td>
+                <td>{{bolest.diseaseSymptoms | diseaseSymptomsPipe}}</td>
+                <td><button class="btn btn-primary redBtn" type="button" (click)="deleteBolest(bolest.id)">Obrisi</button></td>
+            </tr>    
+         </tbody>
+       </table>
+          <div>
+            <button class="btn btn-info right-items redBtn" (click)="nextBolesti()">&#x21E8;</button>
+            <button class="btn btn-info right-items redBtn">{{bolestiStranica}}</button>
+            <button class="btn btn-info right-items redBtn" (click)="prevBolesti()">&#x21E6;</button>
+          </div>
+      </div>
+  </div>
