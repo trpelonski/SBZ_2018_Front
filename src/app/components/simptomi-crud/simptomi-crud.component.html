@@ -6,6 +6,7 @@
             <th scope="col">Naziv</th>
             <th scope="col">Kodni naziv</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -13,11 +14,13 @@
               <tr *ngFor="let simptom of simptomi; let i = index">
                 <td>{{simptom.name}}</td>
                 <td>{{simptom.codeName}}</td>
+                <td><button class="btn btn-primary right-items redBtn" type="button" (click)="editSymptom(simptom)">Izmeni</button></td>
                 <td><button class="btn btn-primary redBtn" type="button" (click)="deleteSymptom(simptom.id)">Obrisi</button></td>
             </tr>    
          </tbody>
        </table>
           <div>
+            <button class="btn btn-info redBtn" (click)="newSymptiom()">Novi simptiom...</button>
             <button class="btn btn-info right-items redBtn" (click)="nextSimptomi()">&#x21E8;</button>
             <button class="btn btn-info right-items redBtn">{{simptomiStranica}}</button>
             <button class="btn btn-info right-items redBtn" (click)="prevSimptomi()">&#x21E6;</button>

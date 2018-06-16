@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { UserDialogComponent } from '../dialogs/user-dialog/user-dialog.component';
+
 @Component({
   selector: 'app-user-crud',
   templateUrl: './user-crud.component.html',
@@ -11,7 +15,7 @@ export class UserCrudComponent implements OnInit {
   korisniciStranica : number = 1;
   users : any;
 
-  constructor(private crudService : CrudService) { }
+  constructor(private crudService : CrudService, private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajKorisnike();
@@ -53,4 +57,18 @@ export class UserCrudComponent implements OnInit {
     this.ucitajKorisnike();
   }
 
+  newUser = function(){
+
+    let dialogRef = this.editDialog.open(UserDialogComponent, {
+      data: {},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajKorisnike();
+      }
+    })
+
+  }
 }

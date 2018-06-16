@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatCardModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,6 +36,10 @@ import { DiseaseSymptomsPipe } from './pipes/disease-symptoms.pipe';
 import { UserCrudComponent } from './components/user-crud/user-crud.component';
 import { PatientCrudComponent } from './components/patient-crud/patient-crud.component';
 import { DiagnosticCrudComponent } from './components/diagnostic-crud/diagnostic-crud.component';
+import { SubstanceComponent } from './components/dialogs/substance/substance.component';
+import { SymptomComponent } from './components/dialogs/sympton/sympton.component';
+import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialog.component';
+import { AntibioticDialogComponent } from './components/dialogs/antibiotic-dialog/antibiotic-dialog.component';
 
 
 var routes = [
@@ -113,6 +119,10 @@ var routes = [
     UserCrudComponent,
     PatientCrudComponent,
     DiagnosticCrudComponent,
+    SubstanceComponent,
+    SymptomComponent,
+    UserDialogComponent,
+    AntibioticDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -120,9 +130,17 @@ var routes = [
     FormsModule,
     ReactiveFormsModule,
     AppLoadModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [AlertService,LoginService, DiagnosticService, ReportService, CrudService, SocketService],
+  entryComponents: [
+    SubstanceComponent,
+    SymptomComponent,
+    UserDialogComponent,
+    AntibioticDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

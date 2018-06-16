@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { SymptomComponent } from '../dialogs/sympton/sympton.component';
+
 @Component({
   selector: 'app-simptomi-crud',
   templateUrl: './simptomi-crud.component.html',
@@ -11,7 +15,7 @@ export class SimptomiCrudComponent implements OnInit {
   simptomiStranica : number = 1;
   simptomi : any;
 
-  constructor(private crudService : CrudService) { }
+  constructor(private crudService : CrudService, private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajSimptome();
@@ -51,6 +55,36 @@ export class SimptomiCrudComponent implements OnInit {
     }
 
     this.ucitajSimptome();
+  }
+
+  editSymptom = function(val: any){
+
+    let dialogRef = this.editDialog.open(SymptomComponent, {
+      data: {val: val, mode: 1},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajSimptome();
+      }
+    })
+
+  }
+
+  newSymptiom = function(){
+
+    let dialogRef = this.editDialog.open(SymptomComponent, {
+      data: {val: null, mode: 0},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajSimptome();
+      }
+    })
+
   }
 
 }

@@ -54,6 +54,10 @@ export class CrudService {
     return this.httpClient.get('/app/secured/getSubstances/'+page,{headers : this.postaviHeadere()})
   }
 
+  getAllSubstances(){
+    return this.httpClient.get('/app/secured/getAllSubstances',{headers : this.postaviHeadere()})
+  }
+
   insertSubstance(substance:any){
     return this.httpClient.post('/app/secured/insertSubstance',substance,{headers : this.postaviHeadere()});
   }

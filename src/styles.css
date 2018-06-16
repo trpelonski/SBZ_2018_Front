@@ -183,3 +183,60 @@ a.submit-button
 .bordered p{
 	padding-left : 1em;
 }
+
+.mat-dialog-container {
+    display: flex !important;
+	flex-direction: column;
+	
+	position: fixed;
+	left: 25%;
+  	top: 5%;
+	max-width: 600px;
+	max-height: 600px;
+	background: #e5f2ff;
+	border: #8594a3;
+	border-width: 3px;
+	border-radius: 6px;
+	z-index: 100000;
+	padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+
+}
+
+.mat-dialog-container > * {
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-dialog-content {
+    max-height: inherit !important;
+}
+
+.mat-dialog-actions {
+    display: block !important;
+    flex-grow: inherit;
+    flex-shrink: inherit;
+	padding: 12px 0 0 !important;
+	position: absolute;
+    bottom: 40px;
+}
+
+.error-message{
+    color : rgb(233, 72, 85);
+    font-weight: 600;
+}
+
+.success-message{
+    color :#3aca3a;
+    font-weight: 600;
+}
+
+.gap-top-sm{
+	margin-top: 20px; 
+}
+
+.gap-top-xs{
+	margin-top: 7px; 
+}

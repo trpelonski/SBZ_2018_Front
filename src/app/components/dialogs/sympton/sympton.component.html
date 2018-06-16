@@ -1,0 +1,35 @@
+<mat-dialog-content>
+    <h6>Simptom</h6>
+    <hr>
+    <div class="container">
+    <form role="form" novalidate class="form-inline" name="symptomForm" [formGroup]="symptomForm">
+      
+        <div class="row proba mx-auto col-lg-12">
+          <input type="text" class="form-control col-lg-12" name="name" id="name" placeholder="Naziv" formControlName="name">
+          <br/>
+          <span class = "error-message" *ngIf="symptomForm.get('name').hasError('required') && symptomForm.get('name').dirty">Obavezno unesite naziv simptoma</span>
+          <span class = "error-message" *ngIf="symptomForm.get('name').hasError('maxlength') && symptomForm.get('name').dirty">Presli ste broj karaktera koji smete uneti</span>
+        </div>
+        
+        <div class="row proba mx-auto col-lg-12 gap-top-sm">
+          <input type="text" class="form-control col-lg-12" name="codeName" id="codeName" placeholder="Kodni naziv" formControlName="codeName">
+          <br/>
+          <span class = "error-message" *ngIf="symptomForm.get('codeName').hasError('required') && symptomForm.get('codeName').dirty">Obavezno unesite kodni naziv simptoma</span>
+          <span class = "error-message" *ngIf="symptomForm.get('codeName').hasError('maxlength') && symptomForm.get('codeName').dirty">Presli ste broj karaktera koji smete uneti</span>
+        </div>
+        
+        <div class="row proba mx-auto col-lg-12 gap-top-sm">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="toShow" formControlName="toShow">
+            <label class="form-check-label" for="toShow">Izborni?</label>
+          </div>
+        </div>
+      
+    </form>
+  </div>
+  </mat-dialog-content>
+  <hr>
+  <mat-dialog-actions>
+    <button type="submit" [disabled]="!symptomForm.valid" class="btn btn-default" (click)="potvrdi()">Potvrdi</button>
+    <button class="btn btn-default" (click)="zatvori()">Zatvori</button>
+  </mat-dialog-actions>

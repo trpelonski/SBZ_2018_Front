@@ -7,6 +7,7 @@
             <th scope="col">Tip</th>
             <th scope="col">Substance</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -15,11 +16,13 @@
                 <td>{{lek.name}}</td>
                 <td>{{lek.type.name}}</td>
                 <td>{{lek.substances | substancesPipe}}</td>
+                <td><button class="btn btn-primary redBtn" type="button" (click)="editMedication(lek)">Izmeni</button></td>
                 <td><button class="btn btn-primary redBtn" type="button" (click)="deleteLek(lek.id)">Obrisi</button></td>
             </tr>    
          </tbody>
        </table>
           <div>
+            <button class="btn btn-info redBtn" (click)="newMedication()">Novi lek...</button>
             <button class="btn btn-info right-items redBtn" (click)="nextLekovi()">&#x21E8;</button>
             <button class="btn btn-info right-items redBtn">{{lekoviStranica}}</button>
             <button class="btn btn-info right-items redBtn" (click)="prevLekovi()">&#x21E6;</button>

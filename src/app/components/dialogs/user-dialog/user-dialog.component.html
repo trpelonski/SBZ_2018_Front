@@ -1,0 +1,30 @@
+<mat-dialog-content>
+    <h6>Korisnik</h6>
+    <hr>
+    <div class="container">
+    <form role="form" novalidate class="form-inline" name="userForm" [formGroup]="userForm">
+      
+        <div class="row proba mx-auto col-lg-12">
+          <input type="text" class="form-control col-lg-12" name="username" id="username" placeholder="Korisnicko ime" formControlName="username">
+          <br/>
+          <span class = "error-message" *ngIf="userForm.get('username').hasError('required') && userForm.get('username').dirty">Obavezno unesite korisnicko ime</span>
+          <span class = "error-message" *ngIf="userForm.get('username').hasError('maxlength') && userForm.get('username').dirty">Presli ste broj karaktera koji smete uneti</span>
+        </div>
+        
+        <div class="row proba mx-auto col-lg-12 gap-top-sm">
+          <select id="role" name="role" formControlName="role" class="form-control col-lg-12">
+            <option value="1">Lekar</option>
+            <option value="2">Administrator</option>
+          </select>
+          <br/>
+          <span class = "error-message" *ngIf="userForm.get('role').hasError('required') && userForm.get('role').dirty">Obavezno dodelite ulogu korisniku</span>
+        </div>
+      
+    </form>
+  </div>
+  </mat-dialog-content>
+  <hr>
+  <mat-dialog-actions>
+    <button type="submit" [disabled]="!userForm.valid" class="btn btn-default" (click)="potvrdi(userForm.value)">Potvrdi</button>
+    <button class="btn btn-default" (click)="zatvori()">Zatvori</button>
+  </mat-dialog-actions>

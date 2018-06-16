@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <h6>Substanca</h6>
+  <hr>
+  <div class="container">
+  <form role="form" novalidate class="form-inline" name="substanceForm" [formGroup]="substanceForm">
+    
+      <div class="row proba mx-auto col-lg-12">
+        <input type="text" class="form-control col-lg-12" name="name" id="name" placeholder="Naziv" formControlName="name">
+        <br/>
+        <span class = "error-message" *ngIf="substanceForm.get('name').hasError('required') && substanceForm.get('name').dirty">Obavezno unesite naziv supstance</span>
+        <span class = "error-message" *ngIf="substanceForm.get('name').hasError('maxlength') && substanceForm.get('name').dirty">Presli ste broj karaktera koji smete uneti</span>
+      </div>
+    
+  </form>
+</div>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions>
+  <button type="submit" [disabled]="!substanceForm.valid" class="btn btn-default" (click)="potvrdi(substanceForm.value)">Submit</button>
+  <button class="btn btn-default" (click)="zatvori()">Cancel</button>
+</mat-dialog-actions>

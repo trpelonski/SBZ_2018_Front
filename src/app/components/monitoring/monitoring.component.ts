@@ -11,6 +11,7 @@ export class MonitoringComponent implements OnInit {
   constructor(private socketService : SocketService) { }
 
   private alerts : string[] = [];
+  private realtimeStart = false;
 
   ngOnInit() {
     this.socketService.initSocket();
@@ -20,8 +21,14 @@ export class MonitoringComponent implements OnInit {
     this.alerts.splice(index,1);
   }
 
-  start(){
-    var message = {token:localStorage.getItem('logovanKorisnik')};
+  start(mode:string){
+    if(mode=="REAL_TIME"){
+      var message = {token:localStorage.getItem('logovanKorisnik'),mode:"REAL_TIME"};
+      this.realtimeStart = true;
+    }else if(mode=="PSEUDO"){
+      var message = {token:localStorage.getItem('logovanKorisnik'),mode:"PSEUDO"};
+    }
+    
     this.socketService.send(message);
 
     this.socketService.getSocket().onmessage = (event) => { 
@@ -30,6 +37,8 @@ export class MonitoringComponent implements OnInit {
   }
 
   stop(){
+    this.realtimeStart = false;
+
     this.socketService.closeSocket();
 
     this.socketService.initSocket();

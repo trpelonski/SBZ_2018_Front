@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 import { DiagnosticService } from '../../services/diagnostic.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { AntibioticDialogComponent } from '../dialogs/antibiotic-dialog/antibiotic-dialog.component';
+
 @Component({
   selector: 'app-lekovi-crud',
   templateUrl: './lekovi-crud.component.html',
@@ -12,7 +16,7 @@ export class LekoviCrudComponent implements OnInit {
   lekoviStranica : number = 1;
   lekovi : any;
 
-  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService) { }
+  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService, private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajLekove();
@@ -69,6 +73,34 @@ export class LekoviCrudComponent implements OnInit {
       index++;
     }
     return -1;
+  }
+
+  newMedication = function(){
+
+    let dialogRef = this.editDialog.open(AntibioticDialogComponent, {
+      data: {val: null, mode : 0},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajLekove();
+      }
+    })
+  }
+
+  editMedication = function(val: any){
+
+    let dialogRef = this.editDialog.open(AntibioticDialogComponent, {
+      data: {val: val, mode : 1},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajLekove();
+      }
+    })
   }
 
 }

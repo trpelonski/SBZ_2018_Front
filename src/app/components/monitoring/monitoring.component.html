@@ -5,6 +5,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
     </div>
-    <a class="red-button" (click)="start()">Zapocni</a>
-    <a class="red-button" (click)="stop()">Zaustavi</a>
+    <a [ngClass]="{'red-button' : !realtimeStart, 'red-button-disabled' : realtimeStart}" (click)="start('REAL_TIME')">Zapocni Real Time</a>
+    <a [ngClass]="{'red-button' : realtimeStart, 'red-button-disabled' : !realtimeStart}" (click)="stop()">Zaustavi Real Time</a>
+    <a [ngClass]="{'red-button' : !realtimeStart, 'red-button-disabled' : realtimeStart}" (click)="start('PSEUDO')">Zapocni Pseudo</a>
 </div>

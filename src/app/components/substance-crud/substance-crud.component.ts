@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { SubstanceComponent } from '../dialogs/substance/substance.component';
+
 @Component({
   selector: 'app-substance-crud',
   templateUrl: './substance-crud.component.html',
@@ -11,7 +15,7 @@ export class SubstanceCrudComponent implements OnInit {
   substancesStranica : number = 1;
   substances : any;
 
-  constructor(private crudService : CrudService) { }
+  constructor(private crudService : CrudService, private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajSubstance();
@@ -51,6 +55,36 @@ export class SubstanceCrudComponent implements OnInit {
     }
 
     this.ucitajSubstance();
+  }
+
+  addEditSubstance = function(val: any){
+
+    let dialogRef = this.editDialog.open(SubstanceComponent, {
+      data: {val: val, mode: 1},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajSubstance();
+      }
+    })
+
+  }
+
+  newSubstance = function(){
+
+    let dialogRef = this.editDialog.open(SubstanceComponent, {
+      data: {val: null, mode: 0},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajSubstance();
+      }
+    })
+
   }
 
 }

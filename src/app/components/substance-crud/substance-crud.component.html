@@ -5,17 +5,20 @@
           <tr>
             <th scope="col">Naziv</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngIf="substances==null || substances?.length === 0">Nema substanca da se pokaze</tr>
               <tr *ngFor="let substance of substances; let i = index">
                 <td>{{substance.name}}</td>
+                <td><button class="btn btn-primary right-items redBtn" type="button" (click)="addEditSubstance(substance)">Izmeni</button></td>
                 <td><button class="btn btn-primary redBtn" type="button" (click)="deleteSubstance(substance.id)">Obrisi</button></td>
-            </tr>    
+              </tr>    
          </tbody>
        </table>
           <div>
+            <button class="btn btn-info redBtn" (click)="newSubstance()">Nova substanca...</button>
             <button class="btn btn-info right-items redBtn" (click)="nextSubstances()">&#x21E8;</button>
             <button class="btn btn-info right-items redBtn">{{substancesStranica}}</button>
             <button class="btn btn-info right-items redBtn" (click)="prevSubstances()">&#x21E6;</button>
