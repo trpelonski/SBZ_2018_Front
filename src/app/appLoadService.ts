@@ -9,7 +9,7 @@ export class AppLoadService {
  
   initializeApp(): Promise<any> {
     return new Promise((resolve, reject) => {
-        localStorage.removeItem('logovanKorisnik');
+        //localStorage.removeItem('logovanKorisnik');
         resolve();
     });
   }

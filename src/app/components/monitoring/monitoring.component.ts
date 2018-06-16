@@ -31,5 +31,7 @@ export class MonitoringComponent implements OnInit {
 
   stop(){
     this.socketService.closeSocket();
+
+    this.socketService.initSocket();
   }
 }
