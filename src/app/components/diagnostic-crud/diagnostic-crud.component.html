@@ -6,6 +6,7 @@
             <th scope="col">Datum</th>
             <th scope="col">Lekar</th>
             <th scope="col">Simptomi</th>
+            <th scope="col">Bolesti i lekovi</th>
             <th></th>
           </tr>
         </thead>
@@ -15,6 +16,7 @@
                 <td>{{diagnostic.date | date : 'medium'}}</td>
                 <td>{{diagnostic.doctor.username}}</td>
                 <td>{{diagnostic.symptoms | symptomsPipe}}</td>
+                <td>{{diagnostic.diagnosticDiseases | diagnosticPipe}}</td>
                 <td><button class="btn btn-primary redBtn" type="button" (click)="deleteDiagnostic(diagnostic.id)">Obrisi</button></td>
             </tr>    
          </tbody>

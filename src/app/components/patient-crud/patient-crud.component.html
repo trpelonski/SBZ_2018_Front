@@ -9,6 +9,7 @@
             <th scope="col">Antibiotici na koje je alergican</th>
             <th scope="col">Substance na koje je alergican</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -20,10 +21,12 @@
                 <td>{{patient.allergicToAntibiotic | medicationsPipe}}</td>
                 <td>{{patient.allergicToSubstance | substancesPipe}}</td>
                 <td><button class="btn btn-primary redBtn" type="button" (click)="deletePatient(patient.id)">Obrisi</button></td>
+                <td><button class="btn btn-primary redBtn" type="button" (click)="editPatient(patient)">Izmeni</button></td>                
             </tr>    
          </tbody>
        </table>
           <div>
+            <button class="btn btn-info redBtn" (click)="newPatient()">Novi pacient...</button>
             <button class="btn btn-info right-items redBtn" (click)="nextPatients()">&#x21E8;</button>
             <button class="btn btn-info right-items redBtn">{{pacijentiStranica}}</button>
             <button class="btn btn-info right-items redBtn" (click)="prevPatients()">&#x21E6;</button>

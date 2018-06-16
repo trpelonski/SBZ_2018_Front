@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 import { DiagnosticService } from '../../services/diagnostic.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { PatientDialogComponent } from '../dialogs/patient-dialog/patient-dialog.component';
+
 @Component({
   selector: 'app-patient-crud',
   templateUrl: './patient-crud.component.html',
@@ -12,7 +16,7 @@ export class PatientCrudComponent implements OnInit {
   pacijentiStranica : number = 1;
   patients : any;
 
-  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService) { }
+  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService, private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajPacijente();
@@ -67,6 +71,36 @@ export class PatientCrudComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  newPatient = function(){
+
+    let dialogRef = this.editDialog.open(PatientDialogComponent, {
+      data: {val: null, mode: 0},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajPacijente();
+      }
+    })
+
+  }
+
+  editPatient = function(val: any){
+
+    let dialogRef = this.editDialog.open(PatientDialogComponent, {
+      data: {val: val, mode: 1},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajPacijente();
+      }
+    })
+
   }
 
 }

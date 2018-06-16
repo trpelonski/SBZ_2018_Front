@@ -40,6 +40,9 @@ import { SubstanceComponent } from './components/dialogs/substance/substance.com
 import { SymptomComponent } from './components/dialogs/sympton/sympton.component';
 import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialog.component';
 import { AntibioticDialogComponent } from './components/dialogs/antibiotic-dialog/antibiotic-dialog.component';
+import { DiseaseDialogComponent } from './components/dialogs/disease-dialog/disease-dialog.component';
+import { PatientDialogComponent } from './components/dialogs/patient-dialog/patient-dialog.component';
+import { DiagnosticPipe } from './pipes/diagnostic-pipe.pipe';
 
 
 var routes = [
@@ -122,7 +125,10 @@ var routes = [
     SubstanceComponent,
     SymptomComponent,
     UserDialogComponent,
-    AntibioticDialogComponent
+    AntibioticDialogComponent,
+    DiseaseDialogComponent,
+    PatientDialogComponent,
+    DiagnosticPipe
   ],
   imports: [
     BrowserModule,
@@ -139,7 +145,9 @@ var routes = [
     SubstanceComponent,
     SymptomComponent,
     UserDialogComponent,
-    AntibioticDialogComponent
+    AntibioticDialogComponent,
+    DiseaseDialogComponent,
+    PatientDialogComponent
   ],
   bootstrap: [AppComponent]
 })

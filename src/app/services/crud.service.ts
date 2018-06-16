@@ -137,6 +137,14 @@ export class CrudService {
     return this.httpClient.delete('/app/secured/deleteDiagnostic',{params:params,headers:this.postaviHeadere()})
   }
 
+  getAllSymptoms(){
+    return this.httpClient.get('/app/secured/getAllSymptoms', {headers:this.postaviHeadere()})
+  }
+
+  getAllMedications(){
+    return this.httpClient.get('/app/secured/getAllAntibiotics',{headers : this.postaviHeadere()})
+  }
+
   postaviHeadere(){
     let headers = new HttpHeaders();
     headers = headers.set('token', localStorage.getItem('logovanKorisnik'));

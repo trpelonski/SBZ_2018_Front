@@ -19,7 +19,9 @@ export class AntibioticDialogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.antibiotic = this.data.val;
+    if(this.data.val != null){
+      Object.assign(this.antibiotic,this.data.val);
+    }
 
     this.crudService.getAllSubstances().subscribe((res: any) => {
       this.substances = res.body;

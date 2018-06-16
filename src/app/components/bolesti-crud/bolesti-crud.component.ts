@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material';
+import { DiseaseDialogComponent } from '../dialogs/disease-dialog/disease-dialog.component';
+
 @Component({
   selector: 'app-bolesti-crud',
   templateUrl: './bolesti-crud.component.html',
@@ -11,10 +15,37 @@ export class BolestiCrudComponent implements OnInit {
   bolestiStranica : number = 1;
   bolesti : any;
 
-  constructor(private crudService : CrudService) { }
+  constructor(private crudService : CrudService,private editDialog: MatDialog) { }
 
   ngOnInit() {
     this.ucitajBolesti();
+  }
+
+  newDisease(){
+    let dialogRef = this.editDialog.open(DiseaseDialogComponent, {
+      data: {val: null, mode : 0},
+      disableClose: false
+    })
+
+    dialogRef.afterClosed().subscribe( (result:any) => {
+      if(result != null){
+        this.ucitajBolesti();
+      }
+    })
+  }
+
+  editBolest(bolest:any){
+
+      let dialogRef = this.editDialog.open(DiseaseDialogComponent, {
+        data: {val: bolest, mode : 1},
+        disableClose: false
+      })
+  
+      dialogRef.afterClosed().subscribe( (result:any) => {
+        if(result != null){
+          this.ucitajBolesti();
+        }
+      })
   }
 
   ucitajBolesti(){
