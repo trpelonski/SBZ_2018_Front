@@ -31,6 +31,9 @@ import { MonitoringComponent } from './components/monitoring/monitoring.componen
 import { SocketService } from './services/socket.service';
 import { SubstancesPipe } from './pipes/substances.pipe';
 import { DiseaseSymptomsPipe } from './pipes/disease-symptoms.pipe';
+import { UserCrudComponent } from './components/user-crud/user-crud.component';
+import { PatientCrudComponent } from './components/patient-crud/patient-crud.component';
+import { DiagnosticCrudComponent } from './components/diagnostic-crud/diagnostic-crud.component';
 
 
 var routes = [
@@ -69,6 +72,18 @@ var routes = [
   {
     path : 'simptomi',
     component : SimptomiCrudComponent
+  },
+  {
+    path : 'korisnici',
+    component : UserCrudComponent
+  },
+  {
+    path : 'pacijenti',
+    component : PatientCrudComponent
+  },
+  {
+    path : 'dijagnoze',
+    component : DiagnosticCrudComponent
   }
 ]
 
@@ -95,6 +110,9 @@ var routes = [
     MonitoringComponent,
     SubstancesPipe,
     DiseaseSymptomsPipe,
+    UserCrudComponent,
+    PatientCrudComponent,
+    DiagnosticCrudComponent,
   ],
   imports: [
     BrowserModule,

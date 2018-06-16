@@ -7,7 +7,13 @@ export class CrudService {
   constructor(private httpClient : HttpClient) { }
 
   getUsers(page:number){
-    return this.httpClient.get('/app/secured/getUsers/'+page,{headers : this.postaviHeadere()})
+    var korisnikToken = localStorage.getItem('logovanKorisnik');
+    var logovanKorisnik = JSON.parse(window.atob(korisnikToken.split('.')[1]));
+
+    let params = new HttpParams();   
+    params = params.append('username', logovanKorisnik.sub);
+
+    return this.httpClient.get('/app/secured/getUsers/'+page,{params:params,headers : this.postaviHeadere()})
   }
 
   insertUser(user:any){
