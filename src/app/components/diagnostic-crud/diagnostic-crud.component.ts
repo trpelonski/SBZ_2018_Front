@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../services/crud.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diagnostic-crud',
@@ -11,10 +12,21 @@ export class DiagnosticCrudComponent implements OnInit {
   dijagnozeStranica : number = 1;
   diagnostics : any;
 
-  constructor(private crudService : CrudService) { }
+  constructor(private crudService : CrudService, private router : Router) { }
 
   ngOnInit() {
-    this.ucitajDijagnoze();
+    var korisnikToken = localStorage.getItem('logovanKorisnik');
+    if(!korisnikToken){
+      this.router.navigate(['']);
+    }else{
+      var logovanKorisnik = JSON.parse(window.atob(korisnikToken.split('.')[1]));
+      var uloga = logovanKorisnik.role[0].authority;
+      if(uloga!='2'){
+        this.router.navigate(['']);
+      }else{
+        this.ucitajDijagnoze();
+      }
+    }
   }
 
   ucitajDijagnoze(){

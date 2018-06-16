@@ -4,6 +4,7 @@ import { CrudService } from '../../services/crud.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog } from '@angular/material';
 import { SymptomComponent } from '../dialogs/sympton/sympton.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-simptomi-crud',
@@ -15,10 +16,21 @@ export class SimptomiCrudComponent implements OnInit {
   simptomiStranica : number = 1;
   simptomi : any;
 
-  constructor(private crudService : CrudService, private editDialog: MatDialog) { }
+  constructor(private crudService : CrudService, private editDialog: MatDialog, private router : Router) { }
 
   ngOnInit() {
-    this.ucitajSimptome();
+    var korisnikToken = localStorage.getItem('logovanKorisnik');
+    if(!korisnikToken){
+      this.router.navigate(['']);
+    }else{
+      var logovanKorisnik = JSON.parse(window.atob(korisnikToken.split('.')[1]));
+      var uloga = logovanKorisnik.role[0].authority;
+      if(uloga!='2'){
+        this.router.navigate(['']);
+      }else{
+        this.ucitajSimptome();
+      }
+    }
   }
 
   ucitajSimptome(){

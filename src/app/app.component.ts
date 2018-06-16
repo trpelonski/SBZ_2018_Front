@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -28,11 +29,15 @@ export class AppComponent implements OnInit{
     }
   }
 
-  constructor(){}
+  constructor(private loginService : LoginService){}
 
   odjava(){
-    localStorage.removeItem('logovanKorisnik');
-    window.location.reload();
+    this.loginService.odjaviSe(this.logovanKorisnik.sub).subscribe((res:any)=>{
+      if(res.success){
+        localStorage.removeItem('logovanKorisnik');
+        window.location.reload();
+      }
+    })
   }
 
   public static updateUserStatus: Subject<boolean> = new Subject();

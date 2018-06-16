@@ -5,6 +5,7 @@ import { DiagnosticService } from '../../services/diagnostic.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog } from '@angular/material';
 import { PatientDialogComponent } from '../dialogs/patient-dialog/patient-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-crud',
@@ -16,10 +17,21 @@ export class PatientCrudComponent implements OnInit {
   pacijentiStranica : number = 1;
   patients : any;
 
-  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService, private editDialog: MatDialog) { }
+  constructor(private crudService : CrudService, private diagnosticService : DiagnosticService, private editDialog: MatDialog, private router : Router) { }
 
   ngOnInit() {
-    this.ucitajPacijente();
+    var korisnikToken = localStorage.getItem('logovanKorisnik');
+    if(!korisnikToken){
+      this.router.navigate(['']);
+    }else{
+      var logovanKorisnik = JSON.parse(window.atob(korisnikToken.split('.')[1]));
+      var uloga = logovanKorisnik.role[0].authority;
+      if(uloga!='2'){
+        this.router.navigate(['']);
+      }else{
+        this.ucitajPacijente();
+      }
+    }
   }
 
   ucitajPacijente(){
