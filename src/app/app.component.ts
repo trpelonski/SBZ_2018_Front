@@ -33,11 +33,11 @@ export class AppComponent implements OnInit{
 
   odjava(){
     this.loginService.odjaviSe(this.logovanKorisnik.sub).subscribe((res:any)=>{
-      if(res.success){
         localStorage.removeItem('logovanKorisnik');
         window.location.reload();
-      }
     })
+    localStorage.removeItem('logovanKorisnik');
+    window.location.reload();
   }
 
   public static updateUserStatus: Subject<boolean> = new Subject();
